@@ -437,7 +437,7 @@
             margin-top: 1rem;
             margin-left: auto;
             font-family: var(--font-sans);
-            font-size: clamp(0.78rem, 1vw, 0.95rem);
+            font-size: clamp(0.92rem, 1.08vw, 1.08rem);
             line-height: 1.7;
             color: rgba(232, 228, 222, 0.52);
             text-align: right;
@@ -737,8 +737,8 @@
                 max-width: none;
                 margin-top: 0;
                 margin-left: auto;
-                font-size: 0.52rem;
-                line-height: 1;
+                font-size: 0.66rem;
+                line-height: 1.08;
                 text-align: right;
                 color: rgba(232, 228, 222, 0.44);
                 white-space: nowrap;
@@ -1434,6 +1434,37 @@
         shapes.push(makeHeart());
         shapes.push(makeDiamond());
         shapes.push(makeHelix());
+
+        function getShapeBounds(pos) {
+            let minX = Infinity, minY = Infinity, minZ = Infinity;
+            let maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
+            for (let i = 0; i < pos.length; i += 3) {
+                const x = pos[i], y = pos[i + 1], z = pos[i + 2];
+                if (x < minX) minX = x; if (x > maxX) maxX = x;
+                if (y < minY) minY = y; if (y > maxY) maxY = y;
+                if (z < minZ) minZ = z; if (z > maxZ) maxZ = z;
+            }
+            return {
+                centerX: (minX + maxX) / 2,
+                centerY: (minY + maxY) / 2,
+                centerZ: (minZ + maxZ) / 2,
+                maxAxis: Math.max(maxX - minX, maxY - minY, maxZ - minZ)
+            };
+        }
+
+        function normalizeShapeToAxis(pos, targetAxis) {
+            const bounds = getShapeBounds(pos);
+            const scale = targetAxis / (bounds.maxAxis || targetAxis);
+            for (let i = 0; i < pos.length; i += 3) {
+                pos[i] = (pos[i] - bounds.centerX) * scale;
+                pos[i + 1] = (pos[i + 1] - bounds.centerY) * scale;
+                pos[i + 2] = (pos[i + 2] - bounds.centerZ) * scale;
+            }
+        }
+
+        // Keep every morph visually the same footprint as the hero object.
+        const heroShapeAxis = getShapeBounds(shapes[0]).maxAxis;
+        shapes.forEach((shape) => normalizeShapeToAxis(shape, heroShapeAxis));
 
         // === PARTICLE SYSTEM ===
         const geometry = new THREE.BufferGeometry();
