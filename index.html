@@ -209,6 +209,22 @@
             justify-content: center;
             padding-left: 3.5rem;
             max-width: 640px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: -3rem -1.5rem -3rem -2rem;
+            width: min(720px, 78vw);
+            background:
+                radial-gradient(circle at 24% 42%, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.48) 42%, transparent 72%),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.32), transparent);
+            filter: blur(10px);
+            opacity: 0.92;
+            pointer-events: none;
+            z-index: -1;
         }
 
         .hero-tag {
@@ -216,8 +232,11 @@
             font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 0.25em;
-            color: var(--c-accent);
+            color: #d8b887;
             margin-bottom: 2rem;
+            background: rgba(8, 7, 6, 0.34);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.28);
+            text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
             opacity: 0;
             animation: slideUp 1.2s var(--ease) forwards 0.3s;
             display: flex;
@@ -241,15 +260,17 @@
             line-height: 1.05;
             font-weight: 400;
             letter-spacing: -0.02em;
-            color: var(--c-highlight);
+            color: #f7f1e8;
             margin-bottom: 2rem;
+            text-shadow: 0 3px 28px rgba(0, 0, 0, 0.88), 0 0 1px rgba(0, 0, 0, 0.9);
             opacity: 0;
             animation: slideUp 1.4s var(--ease) forwards 0.5s;
         }
 
         .hero-title em {
             font-style: italic;
-            color: var(--c-accent);
+            color: #d8b887;
+            text-shadow: 0 3px 22px rgba(0, 0, 0, 0.9);
             display: inline-block;
             position: relative;
         }
@@ -269,7 +290,8 @@
             font-family: var(--font-sans);
             font-weight: 300;
             font-size: 3.6rem;
-            color: var(--c-text-dim);
+            color: rgba(247, 241, 232, 0.76);
+            text-shadow: 0 2px 18px rgba(0, 0, 0, 0.9);
             display: block;
             letter-spacing: 0.02em;
         }
@@ -278,7 +300,8 @@
             font-family: var(--font-sans);
             font-size: 0.9rem;
             line-height: 1.8;
-            color: var(--c-text-dim);
+            color: rgba(247, 241, 232, 0.84);
+            text-shadow: 0 2px 18px rgba(0, 0, 0, 0.92);
             font-weight: 300;
             max-width: 380px;
             margin-bottom: 3rem;
@@ -333,9 +356,10 @@
             font-size: 0.72rem;
             letter-spacing: 0.06em;
             padding: 0.9rem 2rem;
-            background: transparent;
-            color: var(--c-text-dim);
-            border: 1.5px solid rgba(122, 117, 109, 0.2);
+            background: rgba(8, 7, 6, 0.28);
+            color: rgba(247, 241, 232, 0.66);
+            border: 1.5px solid rgba(216, 184, 135, 0.22);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.72);
             text-decoration: none;
             font-weight: 300;
             transition: all 0.5s var(--ease);
@@ -641,8 +665,28 @@
                 padding: 0 2rem;
                 grid-column: 1;
             }
-            .hero-title { font-size: 2.6rem; }
+            .hero::before {
+                inset: -2.5rem -1rem -2.5rem -1.25rem;
+                width: 92vw;
+                background:
+                    radial-gradient(circle at 20% 38%, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.58) 46%, transparent 76%),
+                    linear-gradient(90deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.42), transparent);
+                filter: blur(8px);
+                opacity: 0.96;
+            }
+            #three-container {
+                opacity: 0.74;
+                filter: brightness(0.72) contrast(0.96) saturate(0.95);
+            }
+            .hero-title {
+                font-size: 2.6rem;
+                -webkit-text-stroke: 0.28px rgba(0, 0, 0, 0.48);
+            }
             .hero-title .line-thin { font-size: 2rem; }
+            .hero-body {
+                color: rgba(247, 241, 232, 0.9);
+                border-left-color: rgba(216, 184, 135, 0.42);
+            }
             .morph-info {
                 display: flex;
                 position: absolute;
