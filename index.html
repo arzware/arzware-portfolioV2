@@ -687,27 +687,53 @@
                 color: rgba(247, 241, 232, 0.9);
                 border-left-color: rgba(216, 184, 135, 0.42);
             }
+            .hero-actions {
+                position: relative;
+                z-index: 8;
+                gap: 0.7rem;
+                width: 100%;
+                max-width: 326px;
+            }
+            .btn-main,
+            .btn-ghost {
+                flex: 1 1 0;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 52px;
+                padding: 0.82rem 0.8rem;
+                font-size: 0.58rem;
+                letter-spacing: 0.045em;
+                line-height: 1;
+                white-space: nowrap;
+            }
+            .btn-arrow {
+                margin-left: 0.36rem;
+            }
             .morph-info {
                 display: flex;
                 position: absolute;
                 right: 2rem;
-                bottom: 4.2rem;
+                bottom: 3.25rem;
                 padding: 0;
                 align-items: flex-end;
-                max-width: 42vw;
+                max-width: calc(100vw - 4rem);
+                pointer-events: none;
+                z-index: 2;
             }
             .morph-name {
                 display: none;
             }
             .morph-quote {
                 display: block;
-                max-width: 180px;
+                max-width: none;
                 margin-top: 0;
                 margin-left: auto;
-                font-size: 0.68rem;
-                line-height: 1.45;
+                font-size: 0.52rem;
+                line-height: 1;
                 text-align: right;
-                color: rgba(232, 228, 222, 0.58);
+                color: rgba(232, 228, 222, 0.44);
+                white-space: nowrap;
             }
             .morph-counter {
                 margin-top: 0.7rem;
