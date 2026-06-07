@@ -359,8 +359,8 @@
             letter-spacing: 0.06em;
             padding: 0.9rem 2rem;
             background: rgba(8, 7, 6, 0.28);
-            color: rgba(247, 241, 232, 0.66);
-            border: 1.5px solid rgba(216, 184, 135, 0.22);
+            color: rgba(247, 241, 232, 0.72);
+            border: 1.5px solid rgba(216, 184, 135, 0.3);
             text-shadow: 0 2px 12px rgba(0, 0, 0, 0.72);
             text-decoration: none;
             font-weight: 300;
@@ -686,8 +686,9 @@
             }
             .hero-title .line-thin { font-size: 2rem; }
             .hero-body {
-                color: rgba(247, 241, 232, 0.9);
-                border-left-color: rgba(216, 184, 135, 0.42);
+                color: rgba(247, 241, 232, 0.94);
+                border-left-color: rgba(216, 184, 135, 0.46);
+                text-shadow: 0 2px 20px rgba(0, 0, 0, 0.95);
             }
             .hero-actions {
                 position: relative;
@@ -709,6 +710,11 @@
                 line-height: 1;
                 white-space: nowrap;
             }
+            .btn-ghost {
+                color: rgba(247, 241, 232, 0.76);
+                border-color: rgba(216, 184, 135, 0.34);
+                background: rgba(8, 7, 6, 0.34);
+            }
             .btn-arrow {
                 margin-left: 0.36rem;
             }
@@ -716,7 +722,7 @@
                 display: flex;
                 position: absolute;
                 right: 2rem;
-                bottom: 3.25rem;
+                bottom: 4.35rem;
                 padding: 0;
                 align-items: flex-end;
                 max-width: calc(100vw - 4rem);
@@ -746,7 +752,17 @@
                 margin-top: 0.65rem;
             }
             .nav { padding: 1.5rem 2rem; }
-            .footer { padding: 0 2rem 2rem; }
+            .footer {
+                padding: 0 2rem calc(3.8rem + env(safe-area-inset-bottom));
+            }
+            .footer-left {
+                font-size: 0.5rem;
+                line-height: 1.55;
+                color: rgba(232, 228, 222, 0.48);
+            }
+            .footer-right {
+                display: none;
+            }
             .nav-links { display: none; }
             .content-section {
                 grid-template-columns: 1fr;
