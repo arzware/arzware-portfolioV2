@@ -61,10 +61,12 @@
             opacity: 1;
             transition: opacity 0.55s var(--ease);
             will-change: opacity;
+            pointer-events: none;
         }
 
         #three-container canvas {
-            touch-action: pan-y;
+            pointer-events: none;
+            touch-action: pan-y pinch-zoom;
         }
 
         .object-label {
@@ -1616,7 +1618,12 @@
         let mouseActiveSmooth = 0;
 
         // === POINTER / TOUCH INTERACTION ===
-        const interactionLayer = renderer.domElement;
+        // Keep the WebGL canvas non-interactive so mobile vertical swipes scroll normally.
+        // We listen passively at document level and only feed the shader with coordinates.
+        const interactionLayer = document;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchIsScrolling = false;
 
         function updatePointerPosition(clientX, clientY) {
             mouseNDC.x = (clientX / window.innerWidth) * 2 - 1;
@@ -1624,44 +1631,74 @@
             mouseOnScreen = true;
         }
 
-        // Desktop: pointer events
+        function isHeroTouchZone() {
+            return window.scrollY < window.innerHeight * 0.75;
+        }
+
+        // Desktop: pointer events. Ignore touch pointers here; touch has its own scroll-safe path.
         interactionLayer.addEventListener('pointermove', (e) => {
+            if (e.pointerType === 'touch') return;
             updatePointerPosition(e.clientX, e.clientY);
-        });
+        }, { passive: true });
 
         interactionLayer.addEventListener('pointerdown', (e) => {
+            if (e.pointerType === 'touch') return;
             updatePointerPosition(e.clientX, e.clientY);
             mouseOnScreen = true;
-        });
+        }, { passive: true });
 
-        interactionLayer.addEventListener('pointerup', () => {
+        interactionLayer.addEventListener('pointerup', (e) => {
+            if (e.pointerType === 'touch') return;
             mouseOnScreen = false;
-        });
+        }, { passive: true });
 
-        interactionLayer.addEventListener('pointercancel', () => {
+        interactionLayer.addEventListener('pointercancel', (e) => {
+            if (e.pointerType === 'touch') return;
             mouseOnScreen = false;
-        });
+        }, { passive: true });
 
-        interactionLayer.addEventListener('pointerleave', () => {
+        interactionLayer.addEventListener('pointerleave', (e) => {
+            if (e.pointerType === 'touch') return;
             mouseNDC.set(9999, 9999);
             mouseOnScreen = false;
-        });
+        }, { passive: true });
 
-        // Mobile: explicit touch events for reliable coverage
+        // Mobile: update the object for light horizontal/free movement, but yield to vertical scroll.
+        interactionLayer.addEventListener('touchstart', (e) => {
+            if (!isHeroTouchZone() || !e.touches.length) return;
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            touchIsScrolling = false;
+            updatePointerPosition(touch.clientX, touch.clientY);
+        }, { passive: true });
+
         interactionLayer.addEventListener('touchmove', (e) => {
-            if (window.scrollY < window.innerHeight * 0.75) {
-                const touch = e.touches[0];
+            if (!isHeroTouchZone() || !e.touches.length) return;
+            const touch = e.touches[0];
+            const dx = Math.abs(touch.clientX - touchStartX);
+            const dy = Math.abs(touch.clientY - touchStartY);
+
+            if (dy > 10 && dy > dx * 0.8) {
+                touchIsScrolling = true;
+                mouseOnScreen = false;
+                return;
+            }
+
+            if (!touchIsScrolling) {
                 updatePointerPosition(touch.clientX, touch.clientY);
             }
         }, { passive: true });
 
         interactionLayer.addEventListener('touchend', () => {
+            touchIsScrolling = false;
             mouseOnScreen = false;
-        });
+        }, { passive: true });
 
         interactionLayer.addEventListener('touchcancel', () => {
+            touchIsScrolling = false;
             mouseOnScreen = false;
-        });
+        }, { passive: true });
 
         // Desktop fallback: document-level mouse leave
         document.addEventListener('mouseleave', () => {
@@ -1797,7 +1834,7 @@
             });
 
             if (threeContainer) {
-                threeContainer.style.pointerEvents = opacity > 0.05 ? 'auto' : 'none';
+                threeContainer.style.pointerEvents = 'none';
             }
         }
 
