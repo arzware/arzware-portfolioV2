@@ -643,21 +643,22 @@
             padding: clamp(5rem, 9vw, 8rem) clamp(2rem, 7vw, 7rem);
             position: relative;
             overflow: hidden;
-            border-top: 1px solid rgba(196, 168, 130, 0.08);
+            border-top: 1px solid rgba(26, 26, 26, 0.08);
             background:
-                radial-gradient(circle at 82% 20%, rgba(196, 168, 130, 0.09), transparent 34%),
-                linear-gradient(180deg, #0e0e0e 0%, #11100f 52%, #0e0e0e 100%);
+                radial-gradient(circle at 82% 20%, rgba(139, 115, 85, 0.12), transparent 34%),
+                #f0ebe3;
+            color: #1a1a1a;
         }
 
         .system-stack-section::before {
             content: '';
             position: absolute;
             inset: 8% 6%;
-            border: 1px solid rgba(196, 168, 130, 0.055);
+            border: 1px solid rgba(26, 26, 26, 0.06);
             border-radius: 2.2rem;
             background-image:
-                linear-gradient(rgba(196, 168, 130, 0.035) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(196, 168, 130, 0.035) 1px, transparent 1px);
+                linear-gradient(rgba(26, 26, 26, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(26, 26, 26, 0.035) 1px, transparent 1px);
             background-size: 48px 48px;
             mask-image: radial-gradient(circle at 70% 45%, black 0%, transparent 74%);
             pointer-events: none;
@@ -677,7 +678,7 @@
             font-size: 0.6rem;
             letter-spacing: 0.24em;
             text-transform: uppercase;
-            color: var(--c-accent);
+            color: #8b7355;
             margin-bottom: 1.4rem;
         }
 
@@ -685,7 +686,7 @@
             content: '';
             width: 38px;
             height: 1px;
-            background: rgba(196, 168, 130, 0.42);
+            background: rgba(139, 115, 85, 0.42);
         }
 
         .system-stack-title {
@@ -694,22 +695,22 @@
             line-height: 0.98;
             font-weight: 400;
             letter-spacing: -0.05em;
-            color: var(--c-highlight);
+            color: #1a1a1a;
             margin-bottom: 1.6rem;
         }
 
         .system-stack-title em {
-            color: var(--c-accent);
+            color: #8b7355;
             font-style: italic;
         }
 
         .system-stack-copy {
-            color: var(--c-text-dim);
+            color: #4a4540;
             font-size: clamp(0.95rem, 1.15vw, 1.08rem);
             font-weight: 300;
             line-height: 1.9;
             max-width: 560px;
-            border-left: 2px solid rgba(196, 168, 130, 0.2);
+            border-left: 2px solid rgba(139, 115, 85, 0.3);
             padding-left: 1.25rem;
         }
 
@@ -722,7 +723,7 @@
             font-size: 0.58rem;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: rgba(232, 228, 222, 0.5);
+            color: rgba(26, 26, 26, 0.5);
         }
 
         .system-stack-note::before {
@@ -730,8 +731,8 @@
             width: 7px;
             height: 7px;
             border-radius: 50%;
-            background: var(--c-accent);
-            box-shadow: 0 0 18px rgba(196, 168, 130, 0.65);
+            background: #8b7355;
+            box-shadow: 0 0 18px rgba(139, 115, 85, 0.38);
         }
 
         .system-stack {
@@ -746,7 +747,7 @@
             top: 1.1rem;
             bottom: 1.1rem;
             width: 1px;
-            background: linear-gradient(180deg, transparent, rgba(216, 184, 135, 0.7), rgba(196, 168, 130, 0.18), transparent);
+            background: linear-gradient(180deg, transparent, rgba(139, 115, 85, 0.65), rgba(139, 115, 85, 0.18), transparent);
         }
 
         .system-layer {
@@ -755,11 +756,11 @@
             grid-template-columns: 5.5rem minmax(0, 1fr);
             gap: clamp(1rem, 2vw, 2rem);
             padding: clamp(1rem, 2.1vw, 1.55rem) 0;
-            border-bottom: 1px solid rgba(196, 168, 130, 0.1);
+            border-bottom: 1px solid rgba(26, 26, 26, 0.1);
         }
 
         .system-layer:first-child {
-            border-top: 1px solid rgba(196, 168, 130, 0.1);
+            border-top: 1px solid rgba(26, 26, 26, 0.1);
         }
 
         .system-layer::before {
@@ -771,16 +772,16 @@
             height: 13px;
             transform: translateY(-50%);
             border-radius: 50%;
-            background: #0e0e0e;
-            border: 1px solid rgba(216, 184, 135, 0.7);
-            box-shadow: 0 0 0 5px rgba(196, 168, 130, 0.045), 0 0 24px rgba(196, 168, 130, 0.22);
+            background: #f0ebe3;
+            border: 1px solid rgba(139, 115, 85, 0.72);
+            box-shadow: 0 0 0 5px rgba(139, 115, 85, 0.055), 0 0 24px rgba(139, 115, 85, 0.16);
         }
 
         .system-layer-num {
             font-family: var(--font-mono);
             font-size: 0.58rem;
             letter-spacing: 0.2em;
-            color: rgba(216, 184, 135, 0.82);
+            color: #8b7355;
             padding-top: 0.25rem;
         }
 
@@ -789,12 +790,12 @@
             font-size: clamp(1.25rem, 2.1vw, 2.15rem);
             font-weight: 400;
             letter-spacing: -0.03em;
-            color: var(--c-highlight);
+            color: #1a1a1a;
             margin-bottom: 0.42rem;
         }
 
         .system-layer p {
-            color: rgba(232, 228, 222, 0.58);
+            color: #5a554e;
             font-size: 0.88rem;
             line-height: 1.7;
             font-weight: 300;
@@ -802,12 +803,12 @@
         }
 
         .system-layer:hover h3 {
-            color: var(--c-accent);
+            color: #8b7355;
         }
 
         .system-layer:hover::before {
-            background: var(--c-accent);
-            box-shadow: 0 0 0 5px rgba(196, 168, 130, 0.08), 0 0 30px rgba(196, 168, 130, 0.48);
+            background: #8b7355;
+            box-shadow: 0 0 0 5px rgba(139, 115, 85, 0.08), 0 0 30px rgba(139, 115, 85, 0.32);
         }
 
         .contact-line {
